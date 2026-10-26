@@ -3,7 +3,8 @@
     ros__parameters:
       update_rate: 1000  # Hz
       thread_priority: 98
-      cpu_affinity: [4,5]
+      # Keep the 1 kHz control loop on CPU 4; the FR3 NIC IRQs use CPU 5.
+      cpu_affinity: [4]
       lock_memory: true
       
       joint_impedance_controller:

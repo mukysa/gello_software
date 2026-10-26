@@ -184,6 +184,7 @@ class LeRobotDataBridge(Node):
         self.command_max_age_sec = float(self.get_parameter("command_max_age_sec").value)
         self.camera_cache_host = str(self.get_parameter("camera_cache_host").value)
         self.camera_cache_port = int(self.get_parameter("camera_cache_port").value)
+        self.teleop_source = str(self.get_parameter("teleop_source").value)
         self.task_name = str(self.get_parameter("task_name").value)
         self.deployment_mode = bool(self.get_parameter("deployment_mode").value)
         self.deployment_start_active = bool(self.get_parameter("deployment_start_active").value)
@@ -416,6 +417,7 @@ class LeRobotDataBridge(Node):
         self.declare_parameter("command_max_age_sec", 0.5)
         self.declare_parameter("camera_cache_host", "127.0.0.1")
         self.declare_parameter("camera_cache_port", 5557)
+        self.declare_parameter("teleop_source", "gello")
         self.declare_parameter("task_name", "franka_gello_teleop")
         self.declare_parameter("deployment_mode", False)
         self.declare_parameter("deployment_start_active", True)
@@ -1595,6 +1597,7 @@ class LeRobotDataBridge(Node):
         packet_base: dict[str, Any] = {
             "bridge_publish_s": bridge_publish_s,
             "task": self.task_name,
+            "teleop_source": self.teleop_source,
             "state": robot_state,
             "action": action,
             "joint_state": joint_state,
